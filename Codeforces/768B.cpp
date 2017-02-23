@@ -39,10 +39,43 @@ ll mod(ll a, ll b) // calculates a%b, not remainder
 	return ans;
 }
 
+ll count(ll num){ //returns length of the string, given by
+				  //function (2^[floor(log(base2)(n))+1] - 1)         
+	ll x = 1;
+	while(num > 1){
+		num/=2;
+		x*=2;
+	}
+	return 2*x-1;
+}
+
+bool is_one(ll length, ll target, ll num){
+	if(num < 2) return num%2;
+
+	if(length+1==2*target){
+		return num%2;
+	}
+
+	length/=2;
+	num/=2;
+
+	if(target>length+1){
+		target-=length+1;
+	}
+	return is_one(length,target,num);
+}
 int main()
 {
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	ll n,l,r;
+	cin >> n >> l >> r;
+	int ans = 0;
+	ll x = count(n);
+	for(ll i = l; i <=r; i++){	
+		ans+=is_one(x,i,n);
+	}
+	cout << ans << endl;
 	return 0;
 }

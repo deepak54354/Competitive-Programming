@@ -13,7 +13,7 @@ using namespace std;
 #define F first
 #define S second
 #define SS stringstream
-#define all(v) ((v).begin(),(v).end())
+#define all(v) (v).begin(),(v).end()
 #define FOR(i,a,b) for(int i = a; i <= b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
 #define ll long long
@@ -44,5 +44,17 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	vi v(n);
+	FOR(i,0,n-1)
+		cin >> v[i];
+	int mini = *min_element(all(v));
+	int maxi = *max_element(all(v));
+	int count = 0;
+	FOR(i,0,n-1){
+		if(v[i] > mini && v[i] < maxi) count++;
+	}
+	cout << count << endl;
 	return 0;
 }
