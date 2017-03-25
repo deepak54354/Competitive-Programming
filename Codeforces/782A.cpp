@@ -45,5 +45,25 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	int num = 0;
+	int max = num;
+	int person[n]={0};
+	FOR(i,0,2*n-1){
+		int s;
+		cin >> s;
+		//vi::iterator it = find(table.begin(),table.end(),s);
+		if (person[s-1] == 1){
+			num-=1;
+			person[s-1] = 0;
+		}
+		else{
+			person[s-1] =1;
+			num+=1;
+		}
+		if(max < num) max = num;
+	}
+	cout << max << endl;
 	return 0;
 }

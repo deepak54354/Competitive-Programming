@@ -45,5 +45,26 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		vi v(n);
+		FOR(i,0,n-1)	cin >> v[i];
+		sort(v.begin(),v.end());
+		for(int i = 0;i < n-1; i++){
+			if(abs(v[i]-v[i+1])!=1){
+				if(i==n-2 || abs(v[i+2]-v[i+1]) != 1){
+					cout << v[i+1] << endl;
+					break;
+				}
+				else{
+					cout << v[i] << endl;
+					break;
+				}
+			}
+		}
+	}
 	return 0;
 }

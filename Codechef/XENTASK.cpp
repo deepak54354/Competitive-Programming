@@ -7,9 +7,7 @@ using namespace std;
 #define MIN int(-1e9)
 #define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
-#define ll long long
 #define vi vector<int>
-#define vll vector<ll>
 #define vii vector< vector<int> >
 #define pb push_back
 #define F first
@@ -18,6 +16,8 @@ using namespace std;
 #define all(v) ((v).begin(),(v).end())
 #define FOR(i,a,b) for(int i = a; i <= b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
+#define ll long long
+#define vll vector<ll>
 #define ul unsigned long
 #define READ freopen("input.txt", "r", stdin);
 #define WRITE freopen("output.txt", "w", stdout);
@@ -45,5 +45,26 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		vll X(n),Y(n);
+		FOR(i,0,n-1) cin >> X[i];
+		FOR(i,0,n-1) cin >> Y[i];
+		ll sum1=0,sum2=0;
+		for(int i = 0; i < n; i+=2){
+			if(i!= n-1) {
+				sum1+=X[i]+Y[i+1];
+				sum2+=X[i+1]+Y[i];
+			}
+			else{
+				sum1 += X[i];
+				sum2+=Y[i];
+			}
+		}
+		cout << min(sum1,sum2) << endl;
+	}
 	return 0;
 }

@@ -45,5 +45,26 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	int a,cnt[5] = {0};
+	FOR(i,0,n-1){
+		cin >> a;
+		cnt[a-1]++;
+	}
+	FOR(i,0,n-1){
+		cin >> a;
+		cnt[a-1]--;
+	}
+	FOR(i,0,4) cnt[i] = abs(cnt[i]);
+	int ans = 0;
+	FOR(i,0,4){
+		if(cnt[i]%2){
+			cout << -1 << endl;
+			return 0;
+		}
+		ans += cnt[i]/2;
+	}
+	cout << ans/2 << endl;
 	return 0;
 }

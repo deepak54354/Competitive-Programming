@@ -45,5 +45,33 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n,m;
+	cin >> n >> m;
+	vi universe(n,0);
+	vi check(n,0);
+	FOR(i,0,m-1){
+		universe = check;
+		int p;
+		cin >> p;
+		if(p==1){
+			cout << "YES" << endl;
+			return 0;
+		}
+		FOR(j,0,p-1){
+			int u;
+			cin >> u;
+			if(u<0) universe[abs(u)-1] += -1;
+			else universe[u-1] +=1;
+		}
+		int sum = 0;
+		FOR(k,0,n-1){
+			sum += abs(universe[k]);
+		}
+		if(sum == p){
+			cout << "YES" << endl;
+			return 0;
+		}
+	}
+	cout << "NO" << endl;
 	return 0;
 }

@@ -45,5 +45,22 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int a,b,c,d;
+	cin >> a >> b;
+	cin >> c >> d;
+	int e = d-b;
+	int m = 0;
+	int gcd = __gcd(abs(a),abs(c));
+	if((abs(e))%gcd != 0){
+		cout << -1 << endl;
+		return 0;
+	}
+	while(1){
+		if((c*m+e) >=0 && (c*m+e)%a == 0){
+			cout << c*m+d << endl;
+			return 0;
+		}
+		m++;
+	}
 	return 0;
 }

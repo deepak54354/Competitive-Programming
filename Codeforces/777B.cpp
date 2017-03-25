@@ -45,5 +45,39 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	string s,m;
+	cin >> s >> m;
+	bool check1[n] = {false},check2[n] = {false};
+	sort(m.begin(),m.end());
+	//cout << m[0] << endl;
+	int mini=0,maxi=0;
+	FOR(i,0,n-1){
+		bool flag1 = false,flag2 = false;
+		FOR(j,0,n-1){
+			if(m[j] >= s[i] && !check1[j]){
+				check1[j] = true;
+				flag1 = true;
+				break;
+			}
+		}
+		if(!flag1){
+			mini++;
+			//cout << "Yippee mini " << i << endl;
+		}
+		FOR(j,0,n-1){
+			if(m[j] > s[i] && !check2[j]){
+				check2[j] = true;
+				flag2 = true;
+				break;
+			}
+		}
+		if(flag2){
+			maxi++;
+			//cout << "Yippee maxi " <<i<<endl;
+		}
+	}
+	cout << mini << endl << maxi << endl;
 	return 0;
 }

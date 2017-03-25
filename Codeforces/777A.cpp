@@ -45,5 +45,10 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int a[6][3] = {{0,1,2},{1,0,2},{1,2,0},{2,1,0},{2,0,1},{0,2,1}};
+	int n,x;
+	cin >> n >> x;
+	int r = n%6;
+	cout << a[r][x] << endl;
 	return 0;
 }

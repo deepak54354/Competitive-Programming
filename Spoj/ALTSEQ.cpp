@@ -7,9 +7,7 @@ using namespace std;
 #define MIN int(-1e9)
 #define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
-#define ll long long
 #define vi vector<int>
-#define vll vector<ll>
 #define vii vector< vector<int> >
 #define pb push_back
 #define F first
@@ -18,6 +16,7 @@ using namespace std;
 #define all(v) ((v).begin(),(v).end())
 #define FOR(i,a,b) for(int i = a; i <= b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
+#define ll long long
 #define ul unsigned long
 #define READ freopen("input.txt", "r", stdin);
 #define WRITE freopen("output.txt", "w", stdout);
@@ -45,5 +44,28 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	vi v(n);
+	vector<bool> c;
+	FOR(i,0,n-1){
+		cin >> v[i];
+	}
+	ll ans = 0;
+	FOR(i,0,n-1)
+	{
+		int last = i;
+		ll length = 1;
+		FOR(j,i+1,n-1)
+		{
+			if(abs(v[j]) > abs(v[last]))
+			{
+				length++;
+				last = j;
+			}
+		}
+		ans = max(ans,length);
+	}
+	cout << ans << endl;
 	return 0;
 }

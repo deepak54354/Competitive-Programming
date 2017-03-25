@@ -45,5 +45,17 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	string s;
+	int k;
+	cin >> s >> k;
+	int len = s.size();
+	int num = 0,ans = 0;
+	FORD(i,1,len-1){
+		if(s[i] != '0' && num < k)
+			ans++;
+		else if(s[i] == '0') num++;
+	}
+	if(num < k) cout << len-1 << endl;
+	else cout << ans << endl;
 	return 0;
 }
