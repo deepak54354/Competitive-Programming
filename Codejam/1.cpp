@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -43,7 +43,35 @@ ll mod(ll a, ll b) // calculates a%b, not remainder
 int main()
 {
 	fast_io;
-	//ifstream in_file("file.in");
-	//ofstream out_file("file.out");
+	ifstream in_file("A-large.in");
+	ofstream out_file("file_1.out");
+	int t;
+	in_file>> t;
+	FOR(m,0,t-1){ 
+		string s;
+		int k;
+		in_file>> s;
+		in_file>> k;
+		int n = s.size();
+		int count = 0;
+		bool flag = false;
+		out_file << "Case #" << m+1 << ": ";
+		for(int i = 0; i < n; i++){
+			if(s[i] == '-'){
+				if(i+k-1 > n-1){
+					flag = true;
+					out_file<< "IMPOSSIBLE" << endl;
+					break;
+				}
+				for(int j = i; j < i+k; j++){
+					if(s[j] == '-') s[j] = '+';
+					else s[j] = '-';
+				}
+				count++;
+			}
+		}
+		if(!flag)
+			out_file << count << endl;
+	}
 	return 0;
 }

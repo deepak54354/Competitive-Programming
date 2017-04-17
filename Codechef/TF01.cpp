@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -42,8 +42,27 @@ ll mod(ll a, ll b) // calculates a%b, not remainder
 
 int main()
 {
-	fast_io;
+	//fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int t;
+	cin >> t;
+	while(t--){
+		int n,k,sum = 0;
+		scanf("%d %d", &n, &k);
+		int v[n];
+		FOR(i,0,n-1){
+			scanf("%d", &v[i]);
+			sum+= v[i];
+		}
+		int m[sum+10] = {0};
+		m[0] = 1;
+		FOR(i,0,n-1){
+			for(int j = k; j >= v[i]; j--){
+				m[j] |= m[j-v[i]];
+			}
+		}
+		cout << m[k] << endl;
+	}
 	return 0;
 }

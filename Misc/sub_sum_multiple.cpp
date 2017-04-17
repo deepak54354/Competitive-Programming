@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -45,5 +45,22 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n,k;
+	cin >> n >> k;
+	int a[n],sum = 0;
+	FOR(i,0,n-1){
+		cin >> a[i];
+	}
+	int m[k+10];
+	FOR(i,0,k+9) m[i] = MAX;
+	//cout << m[k]<< endl;
+	m[0] =0;
+	FOR(i,1,k){
+		FOR(j,0,n-1){
+			if(i >= a[j])
+				m[i] = min(m[i-a[j]]+1,m[i]);
+		}
+	}
+	cout << m[k] << endl;
 	return 0;
 }

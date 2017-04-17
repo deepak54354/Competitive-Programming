@@ -1,40 +1,37 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-	ios::sync_with_stdio(false);
-	
-	int n;
-	cin >> n;
-	
-	long max = 0, min = 1000000000;
-	long a[n];
-	for(int i = 0; i < n; i++)
-	{
-		cin >> a[i];
-		
-		if(a[i] < min)
-			min = a[i];
-		
-		if(a[i] > max)
-			max = a[i];
-	}
-	
-	if(n == 1 || n == 2)
-	{
-		cout << "0\n";
-		return 0;
-	}
-	
-	cout << max << " " << min << endl;
-	int ans = 0;
-	for(int i = 0; i < n; i++)
-	{
-		if(a[i] != max && a[i] != min)
-			ans++;
-	}
-	
-	cout << ans << endl;
-	return 0;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.precision(10);
+    cout << fixed;
+
+    int n;
+    cin >> n;
+    vector<pair<int, int> > v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i].first;
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> v[i].second;
+    }
+
+    double L = 0, R = 1e9 + 2;
+    while (L + 1e-8 < R) {
+        double M = (L + R) / 2;
+
+        double upper_bound = 1e9 + 2, lower_bound = 0;
+        for (int i = 0; i< n; i++) {
+            upper_bound = min(upper_bound, v[i].first + M * v[i].second);
+            lower_bound = max(lower_bound, v[i].first - M * v[i].second);
+        }
+
+        if (lower_bound < upper_bound) 
+            R = M;
+        else
+            L = M;
+    }
+
+    cout << R << endl;
 }

@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -28,9 +28,9 @@ using namespace std;
 #  define LLD "%lld"
 #endif
 
-ll mod(ll a, ll b) // calculates a%b, not remainder
+int mod(int a, int b) // calculates a%b, not remainder
 {
-	ll ans;
+	int ans;
 	if(b == 0)
 		return -1;
 	else
@@ -45,5 +45,41 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n,k;
+	cin >> n >> k;
+	vi v(n);
+	FOR(i,0,n-1) v[i] = i+1;
+	int lead = 0;
+	FOR(i,0,k-1){
+		int a;
+		cin >> a;
+		//bool flag = false;
+		if(n-1-lead >= a){
+			cout << v[(lead+a)%n] << " ";
+			v.erase(v.begin()+lead+a);
+			n = v.size();
+			lead = (lead+a)%n;
+			//cout << "Lead " << i << ":- " << lead << endl;
+		}
+		else 
+		{
+			a -= (n-1-lead);
+			int j = mod(a,n);
+			if(j == 0) 
+			{
+				cout << v[n-1] << " ";
+				v.erase(v.begin()+n-1);
+				n = v.size();
+				lead = 0;
+				//cout << "Lead " << i << ":- " << lead << endl; 
+				continue;
+			}
+			cout << v[j-1] << " ";
+			v.erase(v.begin()+j-1);
+			n = v.size();
+			lead = j-1;
+			//cout << "Lead " << i << ":- " << lead << endl; 
+		}
+	}
 	return 0;
 }

@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -45,5 +45,16 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+	int n;
+	cin >> n;
+	vi v(n);
+	FOR(i,0,n-1) cin >> v[i];
+	sort(v.begin(),v.end());
+	int mini;vi diff(n-1);
+	FOR(i,1,n-1) diff[i-1] = v[i] - v[i-1];
+	mini = *min_element(diff.begin(),diff.end());
+	int count = 0;	
+	FOR(i,0,n-2) if(diff[i] == mini) count++;
+	cout << mini << " " << count << endl;
 	return 0;
 }

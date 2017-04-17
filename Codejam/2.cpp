@@ -5,7 +5,7 @@ using namespace std;
 #define eps 1e-9
 #define MAX int(1e9)
 #define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
+#define SQR(n) (n*n)
 #define MEM(a,val) memset(a,val,sizeof(a))
 #define ll long long
 #define vi vector<int>
@@ -43,7 +43,44 @@ ll mod(ll a, ll b) // calculates a%b, not remainder
 int main()
 {
 	fast_io;
-	//ifstream in_file("file.in");
-	//ofstream out_file("file.out");
+	ifstream in_file("B-large.in");
+	ofstream out_file("file_2.out");
+	int t;
+	in_file >> t;
+	FOR(i,0,t-1){
+		string s;
+		in_file >> s;
+		int length = s.size();
+		int j;
+		for(j = 0; j < length-1; j++){
+			if(s[j] == s[j+1])
+			{
+				bool flag1 = false;
+				for(int m = j+1; m < length; m++){
+					if(s[m] == s[j]) continue;
+					else if(s[m] < s[j]) flag1 = true;
+				}
+				if(flag1)
+				{
+					s[j] = char(s[j]-'1'+'0');
+					break;
+				}
+			}
+			else if(s[j] > s[j+1]){
+				s[j] = char(s[j]-'1'+'0');
+				break;
+			}
+		}
+		for(int k = j+1; k < length; k++){
+			s[k] = '9';
+		}
+		out_file << "Case #" << i+1 << ": ";
+		bool flag = false;
+		FOR(j,0,length-1){
+			if(s[j] != '0' && !flag) flag = true; 
+			if(flag) out_file << s[j];
+		}
+		out_file << endl;
+	}
 	return 0;
 }
