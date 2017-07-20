@@ -12,7 +12,7 @@ using namespace std;
 #define S second
 #define SS stringstream
 #define all(v) ((v).begin(),(v).end())
-#define FOR(i,a,b) for(int i = a; i <= b; i++)
+#define FOR(i,a,b) for(int i = a; i < b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
 #define ll long long
 #define ul unsigned long
@@ -44,29 +44,15 @@ int main()
 	//ofstream out_file("file.out");
 	int n;
 	cin >> n;
-	int side[n];
-	FOR(i,0,n-1)
-		cin >> side[i];
-	int i,j;
+	vi v(n);
+	FOR(i,0,n) cin >> v[i];
+	sort(v.begin(),v.end());
 	bool flag = false;
-	sort(side,side+n);
-	for(i = 0; i < n-2; i++)
-	{
-		FOR(j,i+1,n-2)
-		{
-			int sum = side[i] + side[j];
-			FOR(k,j+1,n-1)
-			{
-				if(side[k] < sum)
-					flag = true;
-			}
-			if(flag)
-			{
-				cout << "YES" << endl;
-				return 0;
-			}
-		}
+	for(int i = 0; i < n-2; i++){
+		int a = v[i],b = v[i+1],c = v[i+2];
+		if(a+b<=c) continue;
+		else flag = true;
 	}
-	cout << "NO" << endl;
+	cout << (flag?"YES":"NO") << endl;
 	return 0;
 }

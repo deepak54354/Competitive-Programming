@@ -1,46 +1,121 @@
-#include <bits/stdc++.h>
+#define _CRT_SECURE_NO_DEPRECATE
+#define _SECURE_SCL 0
+#pragma comment(linker, "/STACK:300000000")
+ 
+#include <algorithm>
+#include <bitset>
+#include <cassert>
+#include <cctype>
+#include <complex>
+#include <ctime>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <deque>
+#include <functional>
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <map>
+#include <memory.h>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <utility>
+#include <cmath>
 using namespace std;
-
-#define Pi 3.141592653589793
-#define eps 1e-9
-#define SQR(n) (n*n)
-#define MEM(a,val) memset(a,val,sizeof(a))
-#define vi vector<int>
-#define vii vector< vector<int> >
+ 
 #define pb push_back
-#define F first
-#define S second
-#define SS stringstream
-#define all(v) ((v).begin(),(v).end())
-#define FOR(i,a,b) for(int i = a; i <= b; i++)
-#define FORD(i,a,b) for(int i = b; i >= a; i--)
-#define ll long long
-#define ul unsigned long
-#define READ freopen("input.txt", "r", stdin);
-#define WRITE freopen("output.txt", "w", stdout);
-#define fast_io ios_base::sync_with_stdio(false)
-#ifdef _WIN32
-#  define LLD "%I64d"
-#else
-#  define LLD "%lld"
-#endif
-
-ll mod(ll a, ll b) // calculates a%b, not remainder
-{
-	ll ans;
-	if(b == 0)
-		return -1;
-	else
-	{
-		ans = (a<0 ? mod(((a%b)+b),b) : a%b);
-	}
-	return ans;
+#define mp make_pair
+#define sz(a) (int)(a).size()
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+ 
+#define forn(i,n) for (int i=0; i<int(n); ++i)
+#define fornd(i,n) for (int i=int(n)-1; i>=0; --i)
+#define forab(i,a,b) for (int i=int(a); i<int(b); ++i)
+ 
+typedef long long ll;
+typedef long double ld;
+typedef unsigned long long ull;
+ 
+const int INF = (int) 1e9;
+const long long INF64 = (long long) 1e18;
+const long double eps = 1e-9;
+const long double pi = 3.14159265358979323846;
+ 
+int g[50][50], n, m;
+bool used[50];
+ 
+vector <int> cur;
+ 
+vector <vector <int> > c[50];
+ 
+void dfs(int v){
+        used[v] = true;
+        cur.pb(v);
+        for (int i=1; i<=n; i++)
+                if (g[v][i] && !used[i])
+                        dfs(i);
 }
-
-int main()
-{
-	fast_io;
-	//ifstream in_file("file.in");
-	//ofstream out_file("file.out");
-	return 0;
+ 
+int main(){
+#ifdef dudkamaster
+        freopen("input.txt","rt",stdin);
+        freopen("output.txt","wt",stdout);
+#endif
+        memset(g, 0, sizeof(g));
+        memset(used, 0, sizeof(used));
+        cin >> n >> m;
+        for (int i=0; i<m; i++){
+                int a,b;
+                cin >> a >> b;
+                g[a][b] = g[b][a] = 1;
+        }
+        for (int i=1; i<=n; i++){
+                if (!used[i]){
+                        cur.clear();
+                        dfs(i);
+                        c[cur.size()].pb(cur);
+                }
+        }
+        vector <vector <int> > out = c[3];
+        for (int i=4; i<50; i++){
+                if (sz(c[i])!=0){
+                        cout << -1;
+                        return 0;
+                }
+        }
+        if (c[2].size()>c[1].size()){
+                cout << -1;
+                return 0;
+        }
+        if ((sz(c[1])-sz(c[2])) % 3 != 0){
+                cout << -1;
+                return 0;
+        }
+        forn(i,sz(c[2])){
+                vector <int> tout;
+                tout.pb(c[2][i][0]);
+                tout.pb(c[2][i][1]);
+                tout.pb(c[1][i][0]);
+                out.pb(tout);
+        }
+        for (int i=sz(c[2]); i<sz(c[1]); i += 3){
+                vector <int> tout;
+                forn(j,3)
+                        tout.pb(c[1][i+j][0]);
+                out.pb(tout);
+        }
+        forn(i,n/3){
+                forn(j,3)
+                        cout << out[i][j] << ' ';
+                cout << endl;
+        }
+                       
+        return 0;
 }

@@ -3,18 +3,21 @@ using namespace std;
 
 #define Pi 3.141592653589793
 #define eps 1e-9
-#define SQR(n) (n*n)
+#define MAX int(1e9)
+#define MIN int(-1e9)
+#define SQR(n) ((n)*(n))
 #define MEM(a,val) memset(a,val,sizeof(a))
+#define ll long long
 #define vi vector<int>
+#define vll vector<ll>
 #define vii vector< vector<int> >
 #define pb push_back
 #define F first
 #define S second
 #define SS stringstream
-#define all(v) (v.begin(),v.end())
+#define all(v) ((v).begin(),(v).end())
 #define FOR(i,a,b) for(int i = a; i <= b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
-#define ll long long
 #define ul unsigned long
 #define READ freopen("input.txt", "r", stdin);
 #define WRITE freopen("output.txt", "w", stdout);
@@ -25,42 +28,42 @@ using namespace std;
 #  define LLD "%lld"
 #endif
 
+ll mod(ll a, ll b) // calculates a%b, not remainder
+{
+	ll ans;
+	if(b == 0)
+		return -1;
+	else
+	{
+		ans = (a<0 ? mod(((a%b)+b),b) : a%b);
+	}
+	return ans;
+}
+
 int main()
 {
 	fast_io;
-	//ifstream in_file(file.in);
-	//ofstream out_file(file.out);
+	//ifstream in_file("file.in");
+	//ofstream out_file("file.out");
 	int n;
 	cin >> n;
-	int a[n];
-	int ans = 0;
+	bool arr[n];
+	int count1 = 0;
 	FOR(i,0,n-1)
 	{
-		cin >> a[i];
-		if(a[i] == 1)
-			ans++;
-	}
-	if(ans == n)
-	{
-		cout << n-1 << endl;
-		return 0;
-	}
-	vi v;
-	int count = 0,r= 0;
-	while(r <= n-1)
-	{
-		if(a[r] == 0)
-		{
-			count++;
+		cin >> arr[i];
+		if(arr[i]) count1++;
+	}	
+	int ans = 0;
+	FOR(i,0,n-1){
+		FOR(j,i,n-1){
+			int c0 = 0,c1 = 0;
+			FOR(k,i,j){
+				arr[k]?c1++:c0++;
+			}
+			ans = max(ans,count1+c0-c1);
 		}
-		else
-		{
-			v.pb(count);
-			count = 0;
-		}
-		r++;
 	}
-	v.pb(count);
-	cout << ans+(*max_element(v.begin(),v.end()))<< endl;
+	cout << ans << endl;
 	return 0;
 }
