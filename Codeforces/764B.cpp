@@ -1,66 +1,124 @@
+/****************************************************************************
+*					Author: Deepak Nathani									*
+*					hackerrank:- savager									*
+*					codeforces:- deepak54354								*
+*					Spoj:- deepak54354										*
+*					Github:- deeplearning10									*
+*****************************************************************************/					
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
+// Math
 #define Pi 3.141592653589793
 #define eps 1e-9
-#define SQR(n) (n*n)
+#define MOD 1000000007
+#define SQR(n) ((n)*(n))
+
+// memory 
 #define MEM(a,val) memset(a,val,sizeof(a))
+
+// Data types and related macros
+#define ll long long
+#define ul unsigned long
+#define ld long double
 #define vi vector<int>
+#define vll vector<ll>
 #define vii vector< vector<int> >
+#define pii pair<int,int>
 #define pb push_back
+#define mp make_pair
 #define F first
 #define S second
 #define SS stringstream
-#define all(v) ((v).begin(),(v).end())
-#define FOR(i,a,b) for(int i = a; i <= b; i++)
+
+//loops
+#define all(v) (v).begin(),(v).end()
+#define rall(v) (v).rbegin(),(v).rend()
+#define FOR(i,a,b) for(int i = a; i < b; i++)
 #define FORD(i,a,b) for(int i = b; i >= a; i--)
-#define ll long long
-#define ul unsigned long
+
+// I/O
 #define READ freopen("input.txt", "r", stdin);
 #define WRITE freopen("output.txt", "w", stdout);
-#define fast_io ios_base::sync_with_stdio(false)
+#define fast_io ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #ifdef _WIN32
 #  define LLD "%I64d"
 #else
 #  define LLD "%lld"
 #endif
 
-ll mod(ll a, ll b) // calculates a%b, not remainder
+// useful functions
+template <typename T>
+T mod(T a, T b) // calculates a%b, not remainder
 {
-	ll ans;
+	T ans;
 	if(b == 0)
 		return -1;
 	else
-	{
 		ans = (a<0 ? mod(((a%b)+b),b) : a%b);
-	}
 	return ans;
 }
 
-vector<ll> reverse(vector<ll> v, ll a, ll b)
+ll fast_exp(ll base,ll n, ll M)
 {
-	int j;
-	for(int i = a,j = b; i < j; i++,j--)
-		swap(v[i],v[j]);
-	return v;
+  ll ans = 1;
+  while(n)
+  {
+    if(n%2==1)
+      ans = (ans*base)%M;
+
+    base = (base*base)%M;
+    n = n>>1;
+  }
+  return ans%M;
 }
+
+//splits a string according to a given delimiter
+template<typename Out>
+void split(const string &s, char delim, Out result) {
+    SS ss;
+    ss.str(s);
+    string item;
+    while (getline(ss, item, delim)) {
+        *(result++) = item;
+    }
+}
+vector<string> split(const string &s, char delim) {
+    vector<string> elems;
+    split(s, delim, back_inserter(elems));
+    return elems;
+}
+//function ends
+
+//declare question related constants here 
+
+//functions specific to question
+
+// solution here 
+void solve(){
+	int n;
+	cin >> n;
+	vi v(n);
+	FOR(i,0,n)cin >> v[i];
+	FOR(i,0,(n+1)/2){
+		if(i%2==0) swap(v[i],v[n-i-1]);
+	}
+	FOR(i,0,n) cout << v[i] << " ";
+	cout << endl;
+}
+
+//driver function
 int main()
 {
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
-	ll n;
-	cin >> n;
-	vector<ll> v(n);
-	FOR(i,0,n-1)
-		cin >> v[i];
-	int j;
-	for(int i = 1,j = n; i < j; i++,j = n-i+1)
-	{
-		v = reverse(v, i-1, j-1);
+	int t=1;
+	//cin >> t;
+	while(t--){
+		solve();
 	}
-	FOR(i,0,n-1)
-		cout << v[i] << " ";
-	cout << endl;
 	return 0;
 }

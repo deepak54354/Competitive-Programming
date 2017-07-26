@@ -96,9 +96,34 @@ vector<string> split(const string &s, char delim) {
 
 //functions specific to question
 
-// solution here 
+// solution here
+int maxX=-1,minX=110,minY=110,maxY=-1; 
 void solve(){
-	
+	int n,m;
+    int cnt =0;
+    cin >>n>>m;
+    FOR(i,0,n){
+        string s;
+        cin >>s;
+        FOR(j,0,m){
+            if(s[j]=='B'){
+                cnt++;
+                minY=min(minY,i);
+                minX=min(minX,j);
+                maxX=max(maxX,j);
+                maxY=max(maxY,i);
+            }
+        }
+    }
+    if(cnt==0){
+        cout <<1 << endl;
+        return;
+    }
+    int len = max(maxX-minX+1,maxY-minY+1);
+    if(len>n or len >m) cout << -1 << endl;
+    else{
+        cout << len*len-cnt << endl;
+    }
 }
 
 //driver function
