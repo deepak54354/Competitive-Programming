@@ -98,7 +98,14 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n;
+  cin >> n;
+  int ans = 0;
+  FORD(i,1,5){
+    ans+= n/i;
+    n = n%i;
+  }
+  cout << ans << endl;
 }
 
 //driver function
@@ -112,5 +119,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

@@ -98,7 +98,17 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	ll a,b,c;
+  cin >> a >> b >>c;
+  ll ans = 0;
+  ans=max(ans,(a+b)*c);
+  ans=max(ans,(a+b)+c);
+  ans=max(ans,a*b + c);
+  ans=max(ans,a*b*c);
+  ans=max(ans,a*(b+c));
+  ans=max(ans,a+b+c);
+  ans=max(ans,a + b*c);
+  cout << ans << endl;
 }
 
 //driver function
@@ -112,5 +122,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

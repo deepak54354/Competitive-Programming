@@ -93,12 +93,35 @@ vector<string> split(const string &s, char delim) {
 //function ends
 
 //declare question related constants here 
-
+const int N=int(1e6+10);
+vi first(26,-1);
+vi last(26,-1);
 //functions specific to question
 
 // solution here 
 void solve(){
-	
+	string s;
+    ll n,k;
+    cin >> n >>k;
+    cin >>s;
+    FOR(i,0,n){
+        if(first[s[i]-'A']==-1) first[s[i]-'A']=i;
+        last[s[i]-'A']=i;
+    }
+    /*FOR(i,0,26){
+        char curr='A'+i;
+        cout << curr << " " << first[curr-'A'] << " " << last[curr-'A'] << endl;
+    }*/
+    int gate=0;
+    FOR(i,0,n){
+        if(i==first[s[i]-'A']) gate++;
+        if(gate > k){
+            cout << "YES" << endl;
+            return;
+        }
+        if(i==last[s[i]-'A']) gate--;
+    }
+    cout << "NO" << endl;
 }
 
 //driver function
@@ -112,5 +135,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

@@ -95,10 +95,26 @@ vector<string> split(const string &s, char delim) {
 //declare question related constants here 
 
 //functions specific to question
-
+bool isprime(int n){
+	bool flag =true;
+	for(int i = 2; i*i <= n;i++){
+		if(n%i==0){
+			flag=false;
+			break;
+		}
+	}
+	return flag;
+}
 // solution here 
 void solve(){
-	
+	int n;
+	cin >> n;
+	FOR(i,4,n/2+1){
+		if(!isprime(i) && !isprime(n-i)){
+			cout << i << " " << n-i << endl;
+			break;
+		}
+	}
 }
 
 //driver function
@@ -112,5 +128,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

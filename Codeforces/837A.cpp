@@ -98,7 +98,22 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n;
+	cin >> n;
+	cin.ignore();
+	string s;
+	getline(cin,s);
+	vector<string> v = split(s,' ');
+	int maxi = 0;
+	for(auto i : v){
+		//cout << i << endl;
+		int temp = 0;
+		for(auto j : i){
+			if(toupper(j)==j) temp++;
+		}
+		maxi=max(maxi,temp);
+	}
+	cout << maxi << endl;
 }
 
 //driver function

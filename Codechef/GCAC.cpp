@@ -93,12 +93,60 @@ vector<string> split(const string &s, char delim) {
 //function ends
 
 //declare question related constants here 
-
+const int N=1010;
+const int M=1010;
+vll cand(N,-1);
+vi company(M,0);
+vi minSal(N);
+vi maxJob(M);
+vi offer(M);
+//vector<pii> v(N);
 //functions specific to question
 
+void reset(){
+    FOR(i,0,N){
+        cand[i]=-1;
+        //v[i].clear();
+    }
+    FOR(i,0,M) company[i]=0;
+}
 // solution here 
 void solve(){
-	
+    reset();
+	int n,m;
+    cin >> n >> m;
+    FOR(i,0,n) cin >> minSal[i];
+    FOR(i,0,m) cin >> offer[i] >> maxJob[i];
+    FOR(i,0,n){
+        string s;
+        cin >> s;
+        ll maxi=0;
+        int index;
+        FOR(j,0,m){
+            if(s[j]=='1' && company[j] != maxJob[j]){
+                if(offer[j]>maxi){
+                    maxi=offer[j];
+                    index=j;
+                }
+            }
+        }
+        if(maxi >=minSal[i]){
+            company[index]++;
+            cand[i]=maxi;
+        }
+    }
+    int countCand=0,countComp=0;
+    ll salary=0;
+    FOR(i,0,n){
+        if(cand[i]!=-1){
+            countCand++;
+            salary+=1ll*cand[i];
+        }
+    }
+    FOR(i,0,m){
+        if(company[i]==0) countComp++;
+    }
+    cout << countCand << " " << salary << " " << countComp << endl;
 }
 
 //driver function
@@ -107,8 +155,8 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
-	int t=1;
-	//cin >> t;
+	int t;
+	cin >> t;
 	while(t--){
 		solve();
 	}

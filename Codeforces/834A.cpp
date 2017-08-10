@@ -95,10 +95,20 @@ vector<string> split(const string &s, char delim) {
 //declare question related constants here 
 
 //functions specific to question
-
+char cw[4]={'^','>','v','<'};
+char ccw[4]={'^','<','v','>'};
 // solution here 
 void solve(){
-	
+	char start,end;
+    ll n;
+    cin >> start>>end>>n;
+    n=n%4;
+    char rescw = cw[((find(cw,cw+4,start)-cw)+n)%4];
+    //cout << rescw <<endl;
+    char resccw=ccw[((find(ccw,ccw+4,start)-ccw)+n)%4];
+    if(rescw==resccw) cout <<"undefined"<<endl;
+    else if(end==rescw)cout << "cw" <<endl;
+    else if(end==resccw)cout <<"ccw"<<endl;
 }
 
 //driver function
@@ -112,5 +122,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

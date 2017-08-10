@@ -98,7 +98,30 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n;
+  cin >> n;
+  int levels[n+1]={0};
+  int a1;
+  cin >> a1;
+  FOR(i,0,a1){
+    int l;
+    cin >>l;
+    levels[l]=1;
+  }
+  cin >> a1;
+  FOR(i,0,a1){
+    int l;
+    cin >> l;
+    levels[l]=1;
+  }
+  FOR(i,1,n+1){
+    if(levels[i]==0){
+      cout << "Oh, my keyboard!" << endl;
+      return;
+    }
+  }
+  cout << "I become the guy." << endl;
+  return;
 }
 
 //driver function
@@ -112,5 +135,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

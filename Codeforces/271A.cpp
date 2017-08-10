@@ -95,10 +95,26 @@ vector<string> split(const string &s, char delim) {
 //declare question related constants here 
 
 //functions specific to question
-
+bool distinct(int n){
+    int a[10]={0};
+    while(n){
+        int y=n%10;
+        if(a[y]==1) return false;
+        a[y]=1;
+        n/=10;
+    }
+    return true;
+}
 // solution here 
 void solve(){
-	
+	int y;
+    cin >> y;
+    FOR(i,y+1,9013){
+        if(distinct(i)){
+            cout << i << endl;
+            return;
+        }
+    }
 }
 
 //driver function
@@ -112,5 +128,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

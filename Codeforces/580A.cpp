@@ -98,7 +98,26 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n;
+  cin >> n;
+  vi v(n);
+  FOR(i,0,n) cin >> v[i];
+  int l,r;
+  l=0;r=1;
+  if(n==1){
+    cout << 1 << endl;
+    return;
+  }
+  int ans = 0;
+  while(l<n){
+    while(r<n){
+      if(v[r]>=v[r-1]) r++;
+      else break;
+    }
+    ans= max(ans,r-l);
+    l=r;r++;
+  }
+  cout << ans << endl;
 }
 
 //driver function
@@ -112,5 +131,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }

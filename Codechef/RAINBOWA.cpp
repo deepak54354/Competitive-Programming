@@ -95,10 +95,51 @@ vector<string> split(const string &s, char delim) {
 //declare question related constants here 
 
 //functions specific to question
+bool is_palin(vi v){
+    int n=v.size();
+    int i=0,j=n-1;
+    while(i<=j){
+        if(v[i]!=v[j]){
+            return false;
+        }
+        i++;j--;
+    }
+    return true;
+}
 
+bool isvalid(vi v){
+    bool c[8]={0};
+    int n=v.size();
+    for(auto i : v){
+        if(i > 7) return false;
+        else{
+            c[i]++;
+        }
+    }
+    FOR(i,1,8){
+        if(c[i]==0) return false;
+    }
+    int i=1;
+    while(i<=n/2){
+        if(v[i]<v[i-1]) return false;
+        i++;
+    }
+    while(i<n){
+        if(v[i]>v[i-1]) return false;
+        i++;
+    }
+    return true;
+}
 // solution here 
 void solve(){
-	
+	int n;
+    cin >> n;
+    vi v(n);
+    FOR(i,0,n) cin >> v[i];
+    if(is_palin(v) && isvalid(v)){
+        cout << "yes" << endl;
+    }
+    else cout << "no" << endl;
 }
 
 //driver function
@@ -107,8 +148,8 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
-	int t=1;
-	//cin >> t;
+	int t;
+	cin >> t;
 	while(t--){
 		solve();
 	}

@@ -98,7 +98,37 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n,d;
+    cin >> n >> d;
+    ll sum=0;
+    vll v(n);
+    FOR(i,0,n){
+        cin >> v[i];
+        sum+=v[i];
+    }
+    if(sum%n!=0){
+        cout << -1 << endl;
+        return;
+    }
+    else{
+        ll ans = 0;
+        ll num=sum/n;
+        FOR(i,0,d){
+            ll check=0,temp=0;
+            for(int j=i;j<n;j+=d){
+                check+=num-v[j];
+                temp+=abs(num-v[j]);
+            }
+            if(check!=0){
+                cout << -1 << endl;
+                return;
+            }
+            else{
+                ans += temp/2;
+            }
+        }
+        cout << ans << endl;
+    }
 }
 
 //driver function
@@ -107,8 +137,8 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
-	int t=1;
-	//cin >> t;
+	int t;
+	cin >> t;
 	while(t--){
 		solve();
 	}

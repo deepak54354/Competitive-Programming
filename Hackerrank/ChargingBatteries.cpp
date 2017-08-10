@@ -98,7 +98,30 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n,m,k;
+	cin >> n >>m >> k;
+	ll ans = 10000000000;
+	vector<pii> v(m);
+	vi v1(m+k-1);
+	FOR(i,0,m){
+		int x,y;
+		cin >> x >>y;
+		v[i]={x,y};
+	}
+	sort(all(v));
+	FOR(i,m,m+k-1){
+		v.pb(v[i-m]);
+	}
+	v1[0]=0;
+	//cout << v1[0] << emdl;
+	FOR(i,1,m+k-1){
+		v1[i]=v1[i-1]+ abs(v[i].F-v[i-1].F) + abs(v[i].S-v[i-1].S);
+		//cout << v1[i] << emdl;
+	}
+	for(int i = 0, j = k-1;i<=m && j <m+k-1;i++,j++){
+		ans= min(ans,1ll*(v1[j]-v1[i]));
+	}
+	cout << ans << endl;
 }
 
 //driver function

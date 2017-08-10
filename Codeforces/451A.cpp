@@ -98,7 +98,11 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n,m;
+  cin >> n >> m;
+  int mini=min(m,n);
+  if(mini&1) cout << "Akshat" << endl;
+  else cout << "Malvika" << endl;
 }
 
 //driver function
@@ -112,5 +116,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+	return 0;
 }
