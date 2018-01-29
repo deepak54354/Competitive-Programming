@@ -7,7 +7,7 @@
 *****************************************************************************/					
 
 
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 // Math
@@ -63,32 +63,32 @@ T mod(T a, T b) // calculates a%b, not remainder
 
 ll fast_exp(ll base,ll n, ll M)
 {
-  ll ans = 1;
-  while(n)
-  {
-    if(n%2==1)
-      ans = (ans*base)%M;
-
-    base = (base*base)%M;
-    n = n>>1;
-  }
-  return ans%M;
+	ll ans = 1;
+	while(n)
+	{
+		if(n%2==1)
+		ans = (ans*base)%M;
+		base = (base*base)%M;
+		n = n>>1;
+	}
+	return ans%M;
 }
 
 //splits a string according to a given delimiter
 template<typename Out>
 void split(const string &s, char delim, Out result) {
-    SS ss;
-    ss.str(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        *(result++) = item;
-    }
+	SS ss;
+	ss.str(s);
+	string item;
+	while (getline(ss, item, delim)) {
+		*(result++) = item;
+	}
 }
+
 vector<string> split(const string &s, char delim) {
-    vector<string> elems;
-    split(s, delim, back_inserter(elems));
-    return elems;
+	vector<string> elems;
+	split(s, delim, back_inserter(elems));
+	return elems;
 }
 //function ends
 
@@ -112,5 +112,5 @@ int main()
 	while(t--){
 		solve();
 	}
-    	return 0;
+		return 0;
 }

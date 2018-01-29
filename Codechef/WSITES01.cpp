@@ -1,110 +1,84 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+
 using namespace std;
 
-#define Pi 3.141592653589793
-#define eps 1e-9
-#define MAX int(1e9)
-#define MIN int(-1e9)
-#define SQR(n) ((n)*(n))
-#define MEM(a,val) memset(a,val,sizeof(a))
-#define ll long long
-#define vi vector<int>
-#define vll vector<ll>
-#define vii vector< vector<int> >
-#define pb push_back
-#define F first
-#define S second
-#define SS stringstream
-#define all(v) ((v).begin(),(v).end())
-#define FOR(i,a,b) for(int i = a; i <= b; i++)
-#define FORD(i,a,b) for(int i = b; i >= a; i--)
-#define ul unsigned long
-#define READ freopen("input.txt", "r", stdin);
-#define WRITE freopen("output.txt", "w", stdout);
-#define fast_io ios_base::sync_with_stdio(false)
-#ifdef _WIN32
-#  define LLD "%I64d"
-#else
-#  define LLD "%lld"
-#endif
+// loops
+#define all(v) (v).begin(),(v).end()
+#define rall(v) (v).rbegin(),(v).rend()
 
-ll mod(ll a, ll b) // calculates a%b, not remainder
-{
-	ll ans;
-	if(b == 0)
-		return -1;
-	else
-	{
-		ans = (a<0 ? mod(((a%b)+b),b) : a%b);
-	}
-	return ans;
-}
+#define fast_io ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+
+
 struct node{
-	node* child[26];
+	node* edges[26];
 	node (){
-		FOR(i,0,25) this->child[i] = NULL;
+		for(int i = 0; i < 26; i++){
+			this->edges[i]=NULL;
+		}
 	}
 };
 node* root = new node;
-int n;
 void insert(string s){
-	node* trav = root;
-	int len = s.size();
-	int i = 0,j;
-	while(i < len){
-		j = s[i]-'a';
-		if(trav->child[j] == NULL){
-			trav->child[j] = new node;
-		}
+	int i = 0,n = s.size(),j;
+	node* trav= root;
+	while(i<n){
+		j=s[i]-'a';
+		if(trav->edges[j]==NULL) trav->edges[j]=new node;
 		i++;
-		trav = trav->child[j];
+		trav=trav->edges[j];
 	}
 }
+
 string search(string s){
-	int len = s.size();
+	int i = 0,n = s.size(),j;
+	string ans ="";
 	node* trav = root;
-	//bool flag = false;
-	string ans = "";
-	int i = 0,j;
-	while(i < len){
+	while(i<n){
 		j = s[i]-'a';
-		if(trav->child[j] == NULL){
-			//cout << s[i] << endl;
-			ans += (s[i]);
+		if(trav->edges[j]==NULL){
+			ans+=s[i];
 			return ans;
 		}
-		else 
-		{
-			ans+=s[i];
-			trav= trav->child[j];
-		}
+		ans+=s[i];
+		trav=trav->edges[j];
 		i++;
 	}
 	return "-1";
-}	
-int main()
-{
-	fast_io;
-	//ifstream in_file("file.in");
-	//ofstream out_file("file.out");
+}
+
+void solve(){
+	int n;
 	cin >> n;
+	set<string> ans;
 	vector<string> bl;
-	FOR(i,0,n-1){
-		char c; string s;
+	while(n--){
+		char c;string s;
 		cin >> c >> s;
-		if(c == '-') bl.pb(s);
-		else insert(s);
+		if(c=='+') insert(s);
+		else bl.push_back(s);
 	}
-	FOR(i,0,bl.size()-1){
-		bl[i] = search(bl[i]);
-		if(bl[i] == "-1"){
-			cout << bl[i] << endl;
-			return 0;
+	for(auto i : bl){
+		string q = search(i);
+		if(q=="-1"){
+			cout << -1 << '\n';
+			return;
 		}
+		ans.insert(q);
 	}
-	sort(bl.begin(),bl.end());
-	bl.resize(distance(bl.begin(),unique(bl.begin(),bl.end())));
-	cout << bl.size() << endl;
-	FOR(i,0,bl.size()-1) cout << bl[i] << endl;
-	return 0;
+	cout << ans.size() << "\n";
+	for(auto i : ans){
+		cout << i << "\n";
+	}
+}
+
+int main(){
+	fast_io;
+	int t=1;
+	//cin>>t;
+	while(t--){
+		solve();
+	}
 }

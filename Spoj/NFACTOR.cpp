@@ -114,16 +114,12 @@ void seive(){
 int count(ll n){
     ll num = n;
     ll ans=0;
-    while(1){
+    while(num>1){
         ll div=sf[num];
-        cout << n << "-> " << endl; 
+        //cout << n << "-> " << endl; 
         ans++;
         while(num%div==0){
-            num/=div;
-        }
-        if(sf[num]==num){
-            if(num!=1 && num!=0) ans++;
-            break;
+            num /= div;
         }
     }
     return ans;
@@ -142,13 +138,15 @@ int main()
 	fast_io;
 	//ifstream in_file("file.in");
 	//ofstream out_file("file.out");
+    int t;
+    cin >> t;
     seive();
     v[0].pb(1);
-    for(int i=2;i<=N;i++){
+    for(int i=2;i<N;i++){
+        //cout << i << endl;
         v[count(1ll*i)].pb(i);
     }
-	int t;
-	cin >> t;
+    //cout << "y" << endl;
 	while(t--){
 		solve();
 	}

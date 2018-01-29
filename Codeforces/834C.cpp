@@ -63,32 +63,32 @@ T mod(T a, T b) // calculates a%b, not remainder
 
 ll fast_exp(ll base,ll n, ll M)
 {
-  ll ans = 1;
-  while(n)
-  {
-    if(n%2==1)
-      ans = (ans*base)%M;
+	ll ans = 1;
+	while(n)
+	{
+		if(n%2==1)
+			ans = (ans*base)%M;
 
-    base = (base*base)%M;
-    n = n>>1;
-  }
-  return ans%M;
+		base = (base*base)%M;
+		n = n>>1;
+	}
+	return ans%M;
 }
 
 //splits a string according to a given delimiter
 template<typename Out>
 void split(const string &s, char delim, Out result) {
-    SS ss;
-    ss.str(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        *(result++) = item;
-    }
+		SS ss;
+		ss.str(s);
+		string item;
+		while (getline(ss, item, delim)) {
+				*(result++) = item;
+		}
 }
 vector<string> split(const string &s, char delim) {
-    vector<string> elems;
-    split(s, delim, back_inserter(elems));
-    return elems;
+		vector<string> elems;
+		split(s, delim, back_inserter(elems));
+		return elems;
 }
 //function ends
 
@@ -98,7 +98,22 @@ vector<string> split(const string &s, char delim) {
 
 // solution here 
 void solve(){
-	
+	int n;
+	cin >> n;
+	while(n--){
+		int a,b;
+		cin >> a >> b;
+		ll res = 1ll*a*b;
+		int root = round(cbrt(double(res)));
+		bool flag = (res==1ll*root*root*root);
+		if(flag){
+			if(__gcd(root,a)==root and __gcd(root,b)==root){
+				cout << "Yes" << '\n';
+			}
+			else cout << "No" << '\n';
+		}
+		else cout << "No" << '\n';
+	}
 }
 
 //driver function

@@ -110,24 +110,26 @@ void solve(){
         cout << -1 << endl;
         return;
     }
-    else{
-        ll ans = 0;
-        ll num=sum/n;
-        FOR(i,0,d){
-            ll check=0,temp=0;
-            for(int j=i;j<n;j+=d){
-                check+=num-v[j];
-                temp+=abs(num-v[j]);
+    else
+    {
+        ll num = sum/n;
+        ll steps = 0;
+        FOR(i,0,n){
+            if(v[i]!=num){
+                if(i+d < n){
+                    steps+=abs(num-v[i]);
+                    v[i+d]=v[i+d] - (num-v[i]);
+                    v[i]=num;
+                }
             }
-            if(check!=0){
+        }
+        FOR(i,0,n){
+            if(v[i]!=num){
                 cout << -1 << endl;
                 return;
             }
-            else{
-                ans += temp/2;
-            }
         }
-        cout << ans << endl;
+        cout << steps << endl;
     }
 }
 

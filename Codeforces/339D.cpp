@@ -77,7 +77,7 @@ T fast_exp(T base,T n)
 
 //declare question related constants here 
 #define N 1<<17
-int t[2*(N)+10];
+int t[(N<<1)+10];
 int v[(N)+10];
 int n,m;
 //functions specific to question
