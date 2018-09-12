@@ -1,40 +1,32 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-#define Pi 3.141592653589793
-#define eps 1e-9
-#define SQR(n) (n*n)
-#define MEM(a,val) memset(a,val,sizeof(a))
-#define vi vector<int>
-#define vii vector< vector<int> >
-#define pb push_back
-#define F first
-#define S second
-#define SS stringstream
-#define all(v) (v.begin(),v.end())
-#define FOR(i,a,b) for(int i = a; i <= b; i++)
-#define FORD(i,a,b) for(int i = b; i >= a; i--)
-#define ll long long
-#define ul unsigned long
-string spell(string number)
-{
-	int sum = 0;
-	FORD(i,0,number.size()-1)
-	{
-		sum += number[i]-'0';
+int main(){
+
+	string s;
+	cin >> s;
+	int count = 0;
+	long long sum = 0;
+	if(s.size()==1){
+		cout << 0 << '\n';
+		return 0;
 	}
-	return to_string(sum);
-}
-int main()
-{
-	string n;
-	cin >> n;
-	int ans = 0;
-	while(n.size() > 1)
-	{
-		ans++;
-		n = spell(n);
+	for(int i = 0; i < s.size(); i++){
+		sum += (s[i]-'0');
 	}
-	cout << ans << endl;
-  	return 0;
+	count++;
+
+	while(sum >= 10){
+		long long temp = sum;
+		sum = 0;
+		while(temp){
+			sum += temp%10;
+			temp /= 10;
+		}
+		count++;
+	}
+
+	cout << count << '\n';
+	return 0;
 }
